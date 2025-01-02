@@ -1,0 +1,179 @@
+<!DOCTYPE html>
+<html lang="fr">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Démo Intro.js</title>
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.3.2/css/bootstrap.min.css" rel="stylesheet">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/intro.js/7.2.0/introjs.min.css" rel="stylesheet">
+    <style>
+        .custom-card {
+            transition: transform 0.3s;
+            cursor: pointer;
+        }
+
+        .custom-card:hover {
+            transform: translateY(-5px);
+        }
+
+        .feature-icon {
+            font-size: 2rem;
+            margin-bottom: 1rem;
+        }
+
+        .bg-gradient {
+            background: linear-gradient(120deg, #84fab0 0%, #8fd3f4 100%);
+        }
+
+        /* Style pour que le bouton reste dans la carte */
+        .card-body {
+            display: flex;
+            flex-direction: column;
+            height: 100%;
+        }
+
+        .card-text {
+            flex-grow: 1;
+        }
+
+        /* Style personnalisé pour Intro.js */
+        .introjs-tooltiptext {
+            padding-top: 10px;
+        }
+
+        .introjs-tooltip-title {
+            text-align: center;
+            font-weight: bold;
+            margin-bottom: 10px;
+            padding: 8px;
+            border-bottom: 1px solid #eee;
+        }
+
+        .introjs-tooltip {
+            min-width: 300px;
+        }
+
+        /* Nouveau style pour le contour bleu uniquement */
+        .introjs-helperLayer {
+            background: transparent !important;
+        }
+    </style>
+</head>
+
+<body>
+    <!-- En-tête -->
+    <header class="bg-gradient text-white py-5 mb-5">
+        <div class="container">
+            <h1 class="display-4" data-intro="Bienvenue sur notre plateforme innovante 👋" data-step="1">
+                Ma Super Application
+            </h1>
+            <p class="lead" data-intro="Découvrez nos fonctionnalités uniques" data-step="2">
+                Une expérience utilisateur exceptionnelle
+            </p>
+            <button class="btn btn-light px-4" onclick="startTour()" id="startTour">
+                Démarrer la visite guidée
+            </button>
+        </div>
+    </header>
+
+    <!-- Contenu principal -->
+    <div class="container">
+        <div class="row g-4">
+            <!-- Carte Analytics -->
+            <div class="col-md-4" data-intro="Suivez vos performances en temps réel" data-step="3">
+                <div class="card custom-card h-100 shadow-sm">
+                    <div class="card-body">
+                        <div class="feature-icon text-center">📊</div>
+                        <h5 class="card-title text-center">Analytics</h5>
+                        <p class="card-text text-center">Visualisez vos statistiques et prenez des décisions éclairées
+                        </p>
+                        <button class="btn btn-outline-primary w-100 mt-auto">Voir les stats</button>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Carte Messages -->
+            <div class="col-md-4" data-intro="Communiquez efficacement avec votre équipe" data-step="4">
+                <div class="card custom-card h-100 shadow-sm">
+                    <div class="card-body">
+                        <div class="feature-icon text-center">💬</div>
+                        <h5 class="card-title text-center">Messages</h5>
+                        <p class="card-text text-center">Échangez instantanément avec vos collaborateurs</p>
+                        <button class="btn btn-outline-primary w-100 mt-auto">Ouvrir la messagerie</button>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Carte Projets -->
+            <div class="col-md-4" data-intro="Gérez vos projets en toute simplicité" data-step="5">
+                <div class="card custom-card h-100 shadow-sm">
+                    <div class="card-body">
+                        <div class="feature-icon text-center">📁</div>
+                        <h5 class="card-title text-center">Projets</h5>
+                        <p class="card-text text-center">Organisez et suivez l'avancement de vos projets</p>
+                        <button class="btn btn-outline-primary w-100 mt-auto">Voir les projets</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Section Recherche -->
+        <div class="mt-5" data-intro="Recherchez rapidement ce dont vous avez besoin" data-step="6">
+            <div class="input-group mb-3">
+                <input type="text" class="form-control" placeholder="Rechercher...">
+                <button class="btn btn-primary" type="button">Rechercher</button>
+            </div>
+        </div>
+    </div>
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/intro.js/7.2.0/intro.min.js"></script>
+    <script>
+        function startTour() {
+            introJs().setOptions({
+                nextLabel: 'Suivant →',
+                prevLabel: '← Précédent',
+                skipLabel: 'X',
+                doneLabel: 'Terminer',
+                exitOnOverlayClick: false,
+                showBullets: true,
+                showProgress: true,
+                steps: [
+                    {
+                        title: 'Page d\'accueil',
+                        element: document.querySelector('.display-4'),
+                        intro: 'Bienvenue sur notre application !'
+                    },
+                    {
+                        title: 'Description',
+                        element: document.querySelector('.lead'),
+                        intro: 'Découvrez nos fonctionnalités uniques'
+                    },
+                    {
+                        title: 'Section Analytics',
+                        element: document.querySelector('[data-step="3"]'),
+                        intro: 'Accédez à vos statistiques en temps réel'
+                    },
+                    {
+                        title: 'Section Messages',
+                        element: document.querySelector('[data-step="4"]'),
+                        intro: 'Communiquez facilement avec votre équipe'
+                    },
+                    {
+                        title: 'Section Projets',
+                        element: document.querySelector('[data-step="5"]'),
+                        intro: 'Gérez vos projets efficacement'
+                    },
+                    {
+                        title: 'Barre de recherche',
+                        element: document.querySelector('[data-step="6"]'),
+                        intro: 'Trouvez rapidement ce que vous cherchez'
+                    }
+                ],
+                tooltipClass: 'customTooltip'
+            }).start();
+        }
+    </script>
+</body>
+
+</html>
